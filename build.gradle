@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'springReact'
@@ -23,8 +24,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2")
     compile("mysql:mysql-connector-java")
-    
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    testImplementation 'junit:junit:4.12'
     
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
+
+// Define the main class for the application
+mainClassName = 'springReactProject.App'
