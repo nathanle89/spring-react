@@ -8,5 +8,7 @@ import springReactProject.models.Project;
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 
     @Override
-    Iterable<Project> findAllById(Iterable<Long> iterable);
+    Iterable<Project> findAll();
+
+    Project findByProjectIdentifier(String projectIdentifier);
 }

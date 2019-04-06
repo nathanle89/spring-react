@@ -1,4 +1,4 @@
-package springReactProject.models.errors;
+package springReactProject.errors;
 
 public class AuthenticationError extends HTTPError{
 

@@ -1,6 +1,4 @@
-package springReactProject.models.errors;
-
-import springReactProject.models.errors.HTTPError;
+package springReactProject.errors;
 
 public class ValidationError extends HTTPError {
 
