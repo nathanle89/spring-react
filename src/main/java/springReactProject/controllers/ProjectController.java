@@ -9,9 +9,12 @@ import springReactProject.errors.BadRequestError;
 import springReactProject.models.Project;
 import springReactProject.errors.NotFoundError;
 import springReactProject.responses.DeleteEntityResponse;
+import springReactProject.services.ErrorParserService;
 import springReactProject.services.ProjectService;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -19,12 +22,15 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ErrorParserService errorParserService;
 
     @PostMapping("")
     public ResponseEntity<?> createProject(@Valid @RequestBody Project project, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<BadRequestError>(new BadRequestError("Invalid object"), HttpStatus.BAD_REQUEST);
+            Map<String, String> errorMap = errorParserService.parse(bindingResult);
+            return new ResponseEntity<BadRequestError>(new BadRequestError("Invalid object", errorMap), HttpStatus.BAD_REQUEST);
         }
 
         Project result = projectService.saveOrUpdateProject(project);
@@ -35,7 +41,7 @@ public class ProjectController {
     public ResponseEntity<?> getProject(@PathVariable String projectIdentifier) {
         Project project = projectService.findProjectByIdentifier(projectIdentifier);
         if (project == null) {
-            return new ResponseEntity<NotFoundError>(new NotFoundError("No result found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<NotFoundError>(new NotFoundError("No result found", new HashMap<>()), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
