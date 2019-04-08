@@ -28,7 +28,6 @@ class AddProject extends Component {
         const newProject = {
             ...this.state
         };
-        debugger
         this.props.createProjectAction(newProject, this.props.history)
     }
 

@@ -4,7 +4,6 @@ import { GET_ERRORS } from "./types";
 export const createProjectAction = (project, history) => {
     return async (dispatch) => {
         try {
-            debugger
             const res = await axios.post("/api/projects", project);
             history.push('/');
         } catch (err) {
