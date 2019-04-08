@@ -50,7 +50,7 @@ class AddProject extends Component {
                             <hr/>
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
-                                    <input type="text" className="form-control form-control-lg "
+                                    <input type="text" className={`form-control form-control-lg ${errors.payload.projectName ? 'is-invalid' : ''}`}
                                            placeholder="Project Name" name="projectName"
                                            value={this.state.projectName}
                                            onChange={this.onChange}
@@ -58,7 +58,7 @@ class AddProject extends Component {
                                     <p className="text-danger">{errors.payload.projectName}</p>
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control form-control-lg"
+                                    <input type="text" className={`form-control form-control-lg ${errors.payload.projectIdentifier ? 'is-invalid' : ''}`}
                                            placeholder="Unique Project ID"
                                            name="projectIdentifier"
                                            value={this.state.projectIdentifier}
@@ -68,7 +68,7 @@ class AddProject extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <textarea className="form-control form-control-lg"
+                                    <textarea className={`form-control form-control-lg ${errors.payload.description ? 'is-invalid' : ''}`}
                                               placeholder="Project Description"
                                               name="description"
                                               value={this.state.description}
