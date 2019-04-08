@@ -1,16 +1,28 @@
+//Components
 import React, { Component } from 'react';
 import Dashboard from './components/dashboard';
-import { Layout } from './components/layout';
+import { Header } from './components/layout';
+import { AddProject } from './components/project';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from "react-redux";
+import store from "./store";
+
+//CSS
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-          <Layout />
-          <Dashboard />
-      </div>
+        <Provider store={store}>
+            <Router>
+              <div className="App">
+                  <Header />
+                  <Route exact path="/" component={Dashboard} />
+                  <Route exact path="/addProject" component={AddProject} />
+              </div>
+            </Router>
+        </Provider>
     );
   }
 }
