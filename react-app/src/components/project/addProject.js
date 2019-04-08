@@ -55,7 +55,7 @@ class AddProject extends Component {
                                            value={this.state.projectName}
                                            onChange={this.onChange}
                                     />
-                                    <p className="text-danger">{errors.payload.projectName}</p>
+                                    {errors.payload.projectName && (<p className="invalid-feedback">{errors.payload.projectName}</p>)}
                                 </div>
                                 <div className="form-group">
                                     <input type="text" className={`form-control form-control-lg ${errors.payload.projectIdentifier ? 'is-invalid' : ''}`}
@@ -64,7 +64,7 @@ class AddProject extends Component {
                                            value={this.state.projectIdentifier}
                                            onChange={this.onChange}
                                     />
-                                    <p className="text-danger">{errors.payload.projectIdentifier}</p>
+                                    {errors.payload.projectIdentifier && (<p className="invalid-feedback">{errors.payload.projectIdentifier}</p>)}
                                 </div>
 
                                 <div className="form-group">
@@ -74,7 +74,7 @@ class AddProject extends Component {
                                               value={this.state.description}
                                               onChange={this.onChange}
                                     />
-                                    <p className="text-danger">{errors.payload.description}</p>
+                                    {errors.payload.description && (<p className="invalid-feedback">{errors.payload.description}</p>)}
                                 </div>
                                 <h6>Start Date</h6>
                                 <div className="form-group">
