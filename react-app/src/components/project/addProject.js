@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { createProjectAction } from '../../actions/projectActions';
 
 class AddProject extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            projectName: "",
-            projectIdentifier: "",
-            description: "",
-            startDate: "",
-            endDate: "",
+            projectName: props.project ? props.project.projectName : "",
+            projectIdentifier: props.project ? props.project.projectIdentifier : "",
+            description: props.project ? props.project.description : "",
+            startDate: props.project ? props.project.startDate : "",
+            endDate: props.project ? props.project.endDate : "",
             errors: { payload: {}}
         };
 
@@ -63,6 +63,7 @@ class AddProject extends Component {
                                            name="projectIdentifier"
                                            value={this.state.projectIdentifier}
                                            onChange={this.onChange}
+                                           disabled={this.props.project !== undefined}
                                     />
                                     {errors.payload.projectIdentifier && (<p className="invalid-feedback">{errors.payload.projectIdentifier}</p>)}
                                 </div>
