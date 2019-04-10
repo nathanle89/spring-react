@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'; // React type checking lib
 import { connect } from 'react-redux';
-import { createProjectAction } from '../../actions/projectActions';
+import { createOrUpdateProjectAction } from '../../actions/projectActions';
 
 class AddProject extends Component {
     constructor(props) {
@@ -27,9 +27,18 @@ class AddProject extends Component {
     onSubmit(event) {
         event.preventDefault();
         const newProject = {
-            ...this.state
+            projectName: this.state.projectName,
+            projectIdentifier: this.state.projectIdentifier,
+            description: this.state.description,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
         };
-        this.props.createProjectAction(newProject, this.props.history)
+
+        if (this.props.project) {
+            newProject.id = this.props.project.id;
+        }
+
+        this.props.createOrUpdateProjectAction(newProject, this.props.history)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -112,8 +121,8 @@ const mapStateToProps = state => ({
 });
 
 AddProject.propTypes = {
-    createProjectAction: PropTypes.func.isRequired,
+    createOrUpdateProjectAction: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, { createProjectAction })(AddProject);
+export default connect(mapStateToProps, { createOrUpdateProjectAction })(AddProject);

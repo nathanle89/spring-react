@@ -1,10 +1,11 @@
 import axios from "axios";
 import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from "./types";
 
-const createProjectAction = (project, history) => {
+const createOrUpdateProjectAction = (project, history) => {
     return async (dispatch) => {
         try {
             const res = await axios.post("/api/projects", project);
+            debugger
             history.push('/');
         } catch (err) {
             dispatch({
@@ -36,7 +37,7 @@ const getProjectByIdentifier = (identifier) => {
 };
 
 export {
-    createProjectAction,
+    createOrUpdateProjectAction,
     getProjectsAction,
     getProjectByIdentifier
 }

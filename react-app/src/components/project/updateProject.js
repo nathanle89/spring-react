@@ -20,7 +20,6 @@ class UpdateProject extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger
         this.setState({ project: nextProps.project })
     }
 
@@ -30,7 +29,7 @@ class UpdateProject extends Component {
         }
 
         return (
-            <AddProject project={this.state.project}/>
+            <AddProject project={this.state.project} history={this.props.history}/>
         )
     }
 }
