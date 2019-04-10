@@ -1,11 +1,10 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from "./types";
+import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
 
 const createOrUpdateProjectAction = (project, history) => {
     return async (dispatch) => {
         try {
             const res = await axios.post("/api/projects", project);
-            debugger
             history.push('/');
         } catch (err) {
             dispatch({
@@ -36,8 +35,19 @@ const getProjectByIdentifier = (identifier) => {
     };
 };
 
+const deleteProjectAction = (identifier) => {
+    return async (dispatch) => {
+        const res = await axios.delete(`/api/projects/${identifier}`);
+        dispatch({
+            type: DELETE_PROJECT,
+            payload: identifier
+        })
+    };
+};
+
 export {
     createOrUpdateProjectAction,
     getProjectsAction,
-    getProjectByIdentifier
+    getProjectByIdentifier,
+    deleteProjectAction
 }

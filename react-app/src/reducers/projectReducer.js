@@ -1,4 +1,5 @@
-import {GET_PROJECT, GET_PROJECTS} from "../actions/types";
+import { DELETE_PROJECT, GET_PROJECT, GET_PROJECTS } from "../actions/types";
+import _ from 'lodash';
 
 const initialState = {
     projects: [],
@@ -16,6 +17,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 project: action.payload
+            };
+        case DELETE_PROJECT:
+            let updatedProject = state.projects.filter(project => action.payload != project.projectIdentifier );
+            return {
+                ...state,
+                projects: updatedProject
             };
         default:
             return state;
